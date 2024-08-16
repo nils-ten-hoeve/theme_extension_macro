@@ -2,10 +2,19 @@
 // See : https://github.com/dart-lang/language/blob/main/working/macros/example/lib/data_class.dart
 
 
+import 'dart:async';
+
 import 'package:macros/macros.dart';
 
-macro class ThemeExtensionMacro implements ClassDeclarationsMacro, ClassDefinitionMacro {
+macro class ThemeExtensionMacro implements  ClassTypesMacro , ClassDeclarationsMacro, ClassDefinitionMacro {
   const ThemeExtensionMacro();
+
+
+@override
+  FutureOr<void> buildTypesForClass(ClassDeclaration clazz, ClassTypeBuilder builder) {
+    const StyleClass().buildTypesForClass(clazz, builder);//,
+  }
+
 
   @override
   Future<void> buildDeclarationsForClass(
@@ -28,6 +37,41 @@ macro class ThemeExtensionMacro implements ClassDeclarationsMacro, ClassDefiniti
       const ToString().buildDefinitionForClass(clazz, builder),
     ]);
   }
+  
+  
+
+  
+}
+
+macro class StyleClass implements ClassTypesMacro {
+  const StyleClass();
+  
+  @override
+  FutureOr<void> buildTypesForClass(ClassDeclaration clazz, ClassTypeBuilder builder) {
+       final className = clazz.identifier.name;
+       final classNameWithoutThemeSuffix = className.replaceAll(RegExp(r'Theme$'), '');
+       final styleClassName='${classNameWithoutThemeSuffix}Style';
+
+       //TODO show message when styleClassName already exists using clazz.library
+    builder.declareType(styleClassName, DeclarationCode.fromParts([
+      'class $styleClassName {',
+      '  final Color? surface;',
+      '  final Border? border;',
+      '  final double? borderRadius;',
+
+'   const MyComponentStyle({',
+'     this.surface,',
+'     this.border,',
+'     this.borderRadius,',
+'   });',
+
+      
+      '}'
+    ]));
+  }
+  
+  
+  
 }
 
 macro class AutoConstructor implements ClassDeclarationsMacro {

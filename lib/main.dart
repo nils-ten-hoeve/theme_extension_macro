@@ -3,7 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:theme_extension_macro/macro/theme_extension_macro.dart';
 
-main() => runApp(const MyApp());
+main() {
+  runApp(const MyApp());
+}
 
 ColorScheme myColorScheme(Brightness brightness) =>
     ColorScheme.fromSeed(seedColor: Colors.blue, brightness: brightness);
@@ -55,18 +57,18 @@ class MyComponent extends StatelessWidget {
   }
 }
 
-///augmented by macro
-class MyComponentStyle {
-  final Color? surface;
-  final Border? border;
-  final double? borderRadius;
+// ///augmented by macro
+// class MyComponentStyle {
+//   final Color? surface;
+//   final Border? border;
+//   final double? borderRadius;
 
-  const MyComponentStyle({
-    this.surface,
-    this.border,
-    this.borderRadius,
-  });
-}
+//   const MyComponentStyle({
+//     this.surface,
+//     this.border,
+//     this.borderRadius,
+//   });
+// }
 
 @ThemeExtensionMacro()
 class MyComponentTheme extends ThemeExtension<MyComponentTheme> {
@@ -81,7 +83,28 @@ class MyComponentTheme extends ThemeExtension<MyComponentTheme> {
           borderRadius: 10,
         );
 
-// augmented by macro
+// TODO augment by macro for types:
+/// -  double: lerpDouble(double a, double b, double t)
+/// - int lerpInt()
+/// - Color
+/// - TextStyle
+/// - Alignment
+/// - Offset
+/// - Rect
+/// - Size
+/// - LinearGradient
+/// - RadialGradient
+/// - SweepGradient
+/// - BorderRadius
+/// - Border
+/// - BorderDirectional
+/// - BoxConstraints
+/// - EdgeInsets
+/// - EdgeInsetsGeometry
+/// - Matrix4
+/// - TableBorder
+
+
   @override
   MyComponentTheme lerp(
       covariant ThemeExtension<MyComponentTheme>? other, double t) {
@@ -95,14 +118,14 @@ class MyComponentTheme extends ThemeExtension<MyComponentTheme> {
     );
   }
 
-// augmented by macro
+// TODO augment by macro
   MyComponentTheme copyWithStyle(MyComponentStyle? style) => MyComponentTheme(
         surface: style?.surface ?? surface,
         border: style?.border ?? border,
         borderRadius: style?.borderRadius ?? borderRadius,
       );
 
-// augmented by macro
+// TODO augment by macro
   static MyComponentTheme of(BuildContext context, [MyComponentStyle? style]) =>
       Theme.of(context).extension<MyComponentTheme>()!.copyWithStyle(style);
 }
