@@ -1,0 +1,20 @@
+name: theme_extension_macro
+description: "Given a partial ThemeExtension implementation with stykle fields, this macro will create the copyWith, copyWithStyle and lerp methods in a theme class and creates an additional sytle class based on the theme class."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.6.0-146.0.dev
+
+dependencies:
+  flutter:
+    sdk: flutter
+  macros: ^0.1.0-main.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
